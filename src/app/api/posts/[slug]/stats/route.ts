@@ -12,7 +12,7 @@ export async function GET(
   { params }: { params: { slug: string } }
 ) {
   const db = await getDb();
-  const { slug } = await params;
+  const { slug } = params;
   
   // Increment hit counter and get updated stats
   await db.run(
@@ -35,7 +35,7 @@ export async function POST(
   { params }: { params: { slug: string } }
 ) {
   const db = await getDb();
-  const { slug } = await params;
+  const { slug } = params;
   const ip = request.ip || 'unknown';
   const hashedIP = hashIP(ip);
   
