@@ -19,6 +19,21 @@ export async function getDb() {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
       )
     `);
+
+    await db.exec(`
+      CREATE TABLE IF NOT EXISTS post_stats (
+        slug TEXT PRIMARY KEY,
+        hits INTEGER DEFAULT 0,
+        likes INTEGER DEFAULT 0
+      );
+
+      CREATE TABLE IF NOT EXISTS post_likes (
+        slug TEXT,
+        hashed_ip TEXT,
+        like_count INTEGER DEFAULT 0,
+        PRIMARY KEY (slug, hashed_ip)
+      );
+    `);
   }
   return db;
 }

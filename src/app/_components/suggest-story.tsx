@@ -27,10 +27,8 @@ export function SuggestStory() {
       if (!response.ok) {
         throw new Error('Failed to submit story');
       }
-      setFormData({ title: '', amazonLink: '', summary: '' });
-      
-      // Show success message
       setSubmitSuccess(true);
+      setFormData({ title: '', amazonLink: '', summary: '' });
       
       // Hide success message after 3 seconds
       setTimeout(() => {
@@ -115,8 +113,23 @@ export function SuggestStory() {
           >
             {isSubmitting ? 'Submitting...' : 'Submit Story'}
           </button>
+          {submitSuccess && (
+            <p className="text-green-400 text-sm mt-2">Thank you for your submission!</p>
+          )}
         </form>
         <p className="text-justify text-gray-400 mt-4">📝 Every day we pick a submission and turn it into a full fledged story that get's featured on Stories to Amaze. If your story gets selected, we'll use your affiliate link as the Tool of the Day.</p>
+        <p className="text-gray-400 mt-4 flex items-center">Follow us on 
+          <a 
+            href="https://www.youtube.com/@storiestoamaze-j8b" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 bg-[#FF0000]/10 hover:bg-[#FF0000]/20 text-[#FF0000] px-2 rounded-md mx-1 transition-colors"
+          >
+            <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+            YouTube
+          </a> to see which stories get featured.</p>
       </div>
     </section>
   );
