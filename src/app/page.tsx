@@ -3,6 +3,7 @@ import { HeroPost } from "@/app/_components/hero-post";
 import { Intro } from "@/app/_components/intro";
 import { MoreStories } from "@/app/_components/more-stories";
 import { getAllPosts } from "@/lib/api";
+import { SuggestStory } from "@/app/_components/suggest-story";
 
 export default function Index() {
   const allPosts = getAllPosts();
@@ -25,6 +26,7 @@ export default function Index() {
           excerpt={heroPost.excerpt}
         />
         {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+        <SuggestStory />
       </Container>
     </main>
   );
