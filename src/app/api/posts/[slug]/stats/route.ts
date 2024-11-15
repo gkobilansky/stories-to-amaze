@@ -9,10 +9,10 @@ function hashIP(ip: string): string {
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  context: { params: { slug: string } }
 ) {
   const db = await getDb();
-  const { slug } = params;
+  const { slug } = context.params;
   
   // Increment hit counter and get updated stats
   await db.run(
@@ -32,10 +32,10 @@ export async function GET(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { slug: string } }
+  context: { params: { slug: string } }
 ) {
   const db = await getDb();
-  const { slug } = params;
+  const { slug } = context.params;
   const ip = request.ip || 'unknown';
   const hashedIP = hashIP(ip);
   
