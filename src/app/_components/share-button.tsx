@@ -22,7 +22,9 @@ export function ShareButton({ title, slug }: ShareButtonProps) {
         setShared(true);
         setTimeout(() => setShared(false), 2000);
       } catch (error) {
-        console.error('Error sharing:', error);
+        if (!(error instanceof Error) || error.name !== 'AbortError') {
+          console.error('Error sharing:', error);
+        }
       }
     } else {
       try {

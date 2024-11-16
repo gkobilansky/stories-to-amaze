@@ -9,8 +9,11 @@ export function PostStats({ slug }: { slug: string }) {
   useEffect(() => {
     // Record hit on page load
     fetch(`/api/posts/${slug}/stats`)
-      .then(res => res.json())
-      .then(data => setStats(data));
+      .then(async (res) => {
+        console.log('Response:', res);
+        const data = await res.json();
+        setStats(data);
+      });
   }, [slug]);
 
   const handleLike = async () => {

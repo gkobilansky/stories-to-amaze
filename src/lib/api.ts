@@ -29,3 +29,42 @@ export function getAllPosts(): Post[] {
     .sort((post1, post2) => (post1.date > post2.date ? -1 : 1));
   return posts;
 }
+
+export async function getSubmittedStories() {
+  const response = await fetch('/api/suggest', {
+    next: { revalidate: 60 }, // Revalidate cache every minute
+  });
+  
+  if (!response.ok) {
+    throw new Error('Failed to fetch submissions');
+  }
+  
+  return response.json();
+}
+
+export async function voteForStory(suggestionId: number) {
+  const response = await fetch(`/api/suggest/${suggestionId}/vote`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+  
+  if (!response.ok) {
+    throw new Error('Failed to vote for story');
+  }
+  
+  return response.json();
+}
+
+export async function getStoryVotes(suggestionId: number) {
+  const response = await fetch(`/api/suggest/${suggestionId}/vote`, {
+    next: { revalidate: 60 }, // Revalidate cache every minute
+  });
+  
+  if (!response.ok) {
+    throw new Error('Failed to fetch votes');
+  }
+  
+  return response.json();
+}

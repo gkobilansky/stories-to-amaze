@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { SuggestedStories } from "@/app/_components/suggested-stories";
 
 export function SuggestStory() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export function SuggestStory() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,6 +31,7 @@ export function SuggestStory() {
       }
       setSubmitSuccess(true);
       setFormData({ title: '', amazonLink: '', summary: '' });
+      setRefreshTrigger(prev => prev + 1);
       
       // Hide success message after 3 seconds
       setTimeout(() => {
@@ -47,8 +50,8 @@ export function SuggestStory() {
     <section className="bg-black/5 dark:bg-white/5 py-16 my-16 border-t border-gray-800">
       <div className="max-w-2xl mx-auto px-4">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-100">Suggest a Product Story</h2>
-          <p className="mt-4 text-gray-400">
+          <h2 className="text-3xl font-bold tracking-tight">Suggest a Product Story</h2>
+          <p className="mt-4">
             Have an interesting product story to share? Submit it here and help others discover amazing products.
           </p>
         </div>
@@ -106,6 +109,9 @@ export function SuggestStory() {
           {submitError && (
             <p className="text-red-500 text-sm mt-2">{submitError}</p>
           )}
+          {submitSuccess && (
+            <p className="text-green-400 bg-green-950/50 mt-2 p-2 rounded-md text-center">Thank you for your submission!</p>
+          )}
           <button
             type="submit"
             disabled={isSubmitting}
@@ -113,9 +119,6 @@ export function SuggestStory() {
           >
             {isSubmitting ? 'Submitting...' : 'Submit Story'}
           </button>
-          {submitSuccess && (
-            <p className="text-green-400 text-sm mt-2">Thank you for your submission!</p>
-          )}
         </form>
         <p className="text-justify text-gray-400 mt-4">📝 Every day we pick a submission and turn it into a full fledged story that get's featured on Stories to Amaze. If your story gets selected, we'll use your affiliate link as the Tool of the Day.</p>
         <p className="text-gray-400 mt-4 flex items-center">Follow us on 
@@ -131,6 +134,7 @@ export function SuggestStory() {
             YouTube
           </a> to see which stories get featured.</p>
       </div>
+      <SuggestedStories key={refreshTrigger} />
     </section>
   );
 } 

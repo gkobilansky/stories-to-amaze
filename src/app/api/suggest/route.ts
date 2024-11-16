@@ -28,3 +28,9 @@ export async function POST(request: Request) {
     );
   }
 }
+
+export async function GET(request: Request) {
+  const db = await getDb();
+  const suggestions = await db.all('SELECT * FROM story_suggestions');
+  return NextResponse.json(suggestions);
+}

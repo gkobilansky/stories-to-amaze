@@ -21,6 +21,16 @@ export async function getDb() {
     `);
 
     await db.exec(`
+      CREATE TABLE IF NOT EXISTS suggestion_votes (
+        suggestion_id INTEGER,
+        hashed_ip TEXT,
+        vote_count INTEGER DEFAULT 0,
+        PRIMARY KEY (suggestion_id, hashed_ip),
+        FOREIGN KEY (suggestion_id) REFERENCES story_suggestions(id)
+      );
+    `);
+
+    await db.exec(`
       CREATE TABLE IF NOT EXISTS post_stats (
         slug TEXT PRIMARY KEY,
         hits INTEGER DEFAULT 0,

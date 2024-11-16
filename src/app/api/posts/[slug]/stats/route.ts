@@ -2,17 +2,22 @@ import { NextRequest, NextResponse } from "next/server";
 import { createHash } from "crypto";
 import { getDb } from "@/lib/db";
 
+type Params = Promise<{ slug: string }>
+ 
 // Helper to hash IP addresses for privacy
 function hashIP(ip: string): string {
   return createHash('sha256').update(ip).digest('hex');
 }
 
-export async function GET(
-  request: NextRequest,
-  context: { params: { slug: string } }
-) {
+export async function GET(request: Request, segmentData: { params: Params }) {
+  const params = await segmentData.params
+  const slug = params.slug
   const db = await getDb();
-  const { slug } = context.params;
+
+  console.log('slug', slug);
+  console.log('params', params);
+  console.log('segmentData', segmentData);
+  console.log('request', request);
   
   // Increment hit counter and get updated stats
   await db.run(
@@ -30,12 +35,12 @@ export async function GET(
   return NextResponse.json(stats);
 }
 
-export async function POST(request: NextRequest, context: { params: { slug: string } }) {
+export async function POST(request: Request, segmentData: { params: Params }) {
+  const params = await segmentData.params
   const db = await getDb();
-  const { slug } = context.params;
-  const ip = request.headers.get('x-forwarded-for') || 
-             request.headers.get('x-real-ip') ||
-             'unknown';
+  const { slug } = params;
+
+  const ip = request.headers.get('x-forwarded-for') || 'unknown';
   const hashedIP = hashIP(ip);
   
   // Check user's like count
