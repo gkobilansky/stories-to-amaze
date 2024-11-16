@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@supabase/supabase-js": "github:supabase/supabase-js",
     "classnames": "^2.5.1",
     "date-fns": "^3.6.0",
     "formidable": "^3.5.2",
