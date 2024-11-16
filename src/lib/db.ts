@@ -4,8 +4,8 @@ let supabase: SupabaseClient | null = null;
 
 export async function getDb() {
   if (!supabase) {
-    const supabaseUrl = 'https://your-supabase-url.supabase.co';
-    const supabaseKey = 'your-supabase-key';
+    const supabaseUrl = 'https://csfieadgcddzmvlyhxyl.supabase.co';
+    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzZmllYWRnY2Rkem12bHloeHlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE3NjUwNDAsImV4cCI6MjA0NzM0MTA0MH0.yKhvW4DJfCIX18ZVS0AR39oKLvpo0P_mxTOxmJPyUdo';
     supabase = createClient(supabaseUrl, supabaseKey);
 
     const { error: error1 } = await supabase
