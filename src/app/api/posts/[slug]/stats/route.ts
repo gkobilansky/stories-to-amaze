@@ -7,10 +7,7 @@ function hashIP(ip: string): string {
   return createHash('sha256').update(ip).digest('hex');
 }
 
-export async function GET(
-  request: NextRequest,
-  context: { params: { slug: string } }
-) {
+export async function GET(context: { params: { slug: string } }) {
   const db = await getDb();
   const { slug } = context.params;
   
@@ -30,13 +27,12 @@ export async function GET(
   return NextResponse.json(stats);
 }
 
-export async function POST(
-  request: NextRequest,
-  context: { params: { slug: string } }
-) {
+export async function POST(request: NextRequest, context: { params: { slug: string } }) {
   const db = await getDb();
   const { slug } = context.params;
-  const ip = request.ip || 'unknown';
+  const ip = request.headers.get('x-forwarded-for') || 
+             request.headers.get('x-real-ip') ||
+             'unknown';
   const hashedIP = hashIP(ip);
   
   // Check user's like count
