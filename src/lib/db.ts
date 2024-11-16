@@ -1,49 +1,56 @@
-import sqlite3 from 'sqlite3';
-import { open, Database } from 'sqlite';
+import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-let db: Database | null = null;
+let supabase: SupabaseClient | null = null;
 
 export async function getDb() {
-  if (!db) {
-    db = await open({
-      filename: './stories.db',
-      driver: sqlite3.Database
-    });
+  if (!supabase) {
+    const supabaseUrl = 'https://your-supabase-url.supabase.co';
+    const supabaseKey = 'your-supabase-key';
+    supabase = createClient(supabaseUrl, supabaseKey);
 
-    await db.exec(`
-      CREATE TABLE IF NOT EXISTS story_suggestions (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT NOT NULL,
-        amazon_link TEXT NOT NULL,
-        summary TEXT NOT NULL,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-      )
-    `);
+    const { error: error1 } = await supabase
+      .from('story_suggestions')
+      .select('*')
+      .limit(1);
 
-    await db.exec(`
-      CREATE TABLE IF NOT EXISTS suggestion_votes (
-        suggestion_id INTEGER,
-        hashed_ip TEXT,
-        vote_count INTEGER DEFAULT 0,
-        PRIMARY KEY (suggestion_id, hashed_ip),
-        FOREIGN KEY (suggestion_id) REFERENCES story_suggestions(id)
-      );
-    `);
+    if (error1) {
+      await supabase
+        .from('story_suggestions')
+        .insert([{ title: 'Sample title', amazon_link: 'http://example.com', summary: 'Sample summary' }]);
+    }
 
-    await db.exec(`
-      CREATE TABLE IF NOT EXISTS post_stats (
-        slug TEXT PRIMARY KEY,
-        hits INTEGER DEFAULT 0,
-        likes INTEGER DEFAULT 0
-      );
+    const { error: error2 } = await supabase
+      .from('suggestion_votes')
+      .select('*')
+      .limit(1);
 
-      CREATE TABLE IF NOT EXISTS post_likes (
-        slug TEXT,
-        hashed_ip TEXT,
-        like_count INTEGER DEFAULT 0,
-        PRIMARY KEY (slug, hashed_ip)
-      );
-    `);
+    if (error2) {
+      await supabase
+        .from('suggestion_votes')
+        .insert([{ suggestion_id: 1, hashed_ip: 'sample_hashed_ip', vote_count: 0 }]);
+    }
+
+    const { error: error3 } = await supabase
+      .from('post_stats')
+      .select('*')
+      .limit(1);
+
+    if (error3) {
+      await supabase
+        .from('post_stats')
+        .insert([{ slug: 'sample-slug', hits: 0, likes: 0 }]);
+    }
+
+    const { error: error4 } = await supabase
+      .from('post_likes')
+      .select('*')
+      .limit(1);
+
+    if (error4) {
+      await supabase
+        .from('post_likes')
+        .insert([{ slug: 'sample-slug', hashed_ip: 'sample_hashed_ip', like_count: 0 }]);
+    }
   }
-  return db;
+  return supabase;
 }
