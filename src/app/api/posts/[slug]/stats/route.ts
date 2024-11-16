@@ -7,7 +7,10 @@ function hashIP(ip: string): string {
   return createHash('sha256').update(ip).digest('hex');
 }
 
-export async function GET(context: { params: { slug: string } }) {
+export async function GET(
+  request: NextRequest,
+  context: { params: { slug: string } }
+) {
   const db = await getDb();
   const { slug } = context.params;
   
