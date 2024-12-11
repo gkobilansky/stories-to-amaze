@@ -11,6 +11,7 @@
     "formidable": "^3.5.2",
     "gray-matter": "^4.0.3",
     "next": "15.0.2",
+    "openai": "^4.76.1",
     "paapi5-typescript-sdk": "^0.2.0",
     "querystring": "^0.2.1",
     "react": "19.0.0-rc-02c0e824-20241028",
