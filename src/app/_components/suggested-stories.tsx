@@ -49,7 +49,7 @@ export function SuggestedStories() {
       </div>
       <div className="max-w-2xl mx-auto px-4">
         <div className="space-y-6">
-          {suggestions.map((suggestion) => (
+          {suggestions.length > 0 && suggestions.map((suggestion) => (
             <div key={suggestion.id} className="bg-black/20 dark:bg-white/5 p-8 rounded-lg backdrop-blur-sm">
               <h3 className="text-xl font-bold">
                 <a href={suggestion.amazon_link} target="_blank" rel="noopener noreferrer">

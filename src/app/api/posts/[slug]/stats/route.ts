@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { createHash } from "crypto";
 import { getDb } from "@/lib/db";
 
@@ -12,42 +12,43 @@ function hashIP(ip: string): string {
 export async function GET(request: Request, segmentData: { params: Params }) {
   const params = await segmentData.params
   const slug = params.slug
-  const db = await getDb();
+  const supabase = await getDb();
+  
+  // Increment hit counter using RPC function
+  const { error: updateError } = await supabase
+    .rpc('increment_hits', { row_slug: slug })
+    .select();
 
-  console.log('slug', slug);
-  console.log('params', params);
-  console.log('segmentData', segmentData);
-  console.log('request', request);
+  if (updateError) throw updateError;
   
-  // Increment hit counter and get updated stats
-  await db.run(
-    `INSERT INTO post_stats (slug, hits) 
-     VALUES (?, 1)
-     ON CONFLICT(slug) DO UPDATE SET hits = hits + 1`,
-    [slug]
-  );
+  const { data: stats, error: statsError } = await supabase
+    .from('post_stats')
+    .select('hits, likes')
+    .eq('slug', slug)
+    .single();
   
-  const stats = await db.get(
-    'SELECT hits, likes FROM post_stats WHERE slug = ?',
-    [slug]
-  );
+  if (statsError) throw statsError;
   
   return NextResponse.json(stats);
 }
 
 export async function POST(request: Request, segmentData: { params: Params }) {
   const params = await segmentData.params
-  const db = await getDb();
   const { slug } = params;
+  const supabase = await getDb();
 
   const ip = request.headers.get('x-forwarded-for') || 'unknown';
   const hashedIP = hashIP(ip);
   
   // Check user's like count
-  const userLikes = await db.get(
-    'SELECT like_count FROM post_likes WHERE slug = ? AND hashed_ip = ?',
-    [slug, hashedIP]
-  );
+  const { data: userLikes, error: likesError } = await supabase
+    .from('post_likes')
+    .select('like_count')
+    .eq('slug', slug)
+    .eq('hashed_ip', hashedIP)
+    .single();
+  
+  if (likesError && likesError.code !== 'PGRST116') throw likesError;
   
   if (userLikes?.like_count >= 16) {
     return NextResponse.json(
@@ -56,42 +57,52 @@ export async function POST(request: Request, segmentData: { params: Params }) {
     );
   }
   
-  // Start a transaction to ensure data consistency
-  await db.run('BEGIN TRANSACTION');
-  
   try {
     // Update or insert user likes
-    await db.run(
-      `INSERT INTO post_likes (slug, hashed_ip, like_count)
-       VALUES (?, ?, 1)
-       ON CONFLICT(slug, hashed_ip) DO UPDATE SET like_count = like_count + 1`,
-      [slug, hashedIP]
-    );
+    const { error: likesUpdateError } = await supabase
+      .from('post_likes')
+      .upsert(
+        { 
+          slug, 
+          hashed_ip: hashedIP, 
+          like_count: (userLikes?.like_count || 0) + 1 
+        },
+        { 
+          onConflict: 'slug,hashed_ip',
+          ignoreDuplicates: false
+        }
+      );
+
+    if (likesUpdateError) throw likesUpdateError;
+
+    // Then update the post_stats table
+    const { error: statsUpdateError } = await supabase
+      .rpc('increment_likes', { row_slug: slug })  // Call RPC directly
+      .select();
+
+    if (statsUpdateError) throw statsUpdateError;
     
-    // Update total likes in post_stats
-    await db.run(
-      `INSERT INTO post_stats (slug, likes)
-       VALUES (?, 1)
-       ON CONFLICT(slug) DO UPDATE SET likes = likes + 1`,
-      [slug]
-    );
+    // Get updated stats with joined user likes
+    const { data: stats, error: statsError } = await supabase
+      .from('post_stats')
+      .select(`
+        likes,
+        post_likes(like_count)
+      `)
+      .eq('slug', slug)
+      .eq('post_likes.hashed_ip', hashedIP)
+      .single();
     
-    await db.run('COMMIT');
+    if (statsError) throw statsError;
     
-    // Get updated stats
-    const stats = await db.get(
-      `SELECT 
-        ps.likes,
-        pl.like_count as userLikes
-       FROM post_stats ps
-       LEFT JOIN post_likes pl ON pl.slug = ps.slug AND pl.hashed_ip = ?
-       WHERE ps.slug = ?`,
-      [hashedIP, slug]
-    );
+    // Transform the response to match the expected format
+    const transformedStats = {
+      likes: stats.likes,
+      userLikes: stats.post_likes?.[0]?.like_count || 0
+    };
     
-    return NextResponse.json(stats);
+    return NextResponse.json(transformedStats);
   } catch (error) {
-    await db.run('ROLLBACK');
     console.error('Error updating likes:', error);
     return NextResponse.json(
       { error: 'Failed to update likes' },

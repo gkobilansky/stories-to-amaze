@@ -13,11 +13,18 @@ export async function POST(request: Request) {
       );
     }
 
-    const db = await getDb();
-    await db.run(
-      'INSERT INTO story_suggestions (title, amazon_link, summary) VALUES (?, ?, ?)',
-      [title, amazonLink, summary]
-    );
+    const supabase = await getDb();
+    if (!supabase) {
+      throw new Error('Failed to initialize database');
+    }
+
+    const { error } = await supabase
+      .from('story_suggestions')
+      .insert([
+        { title, amazon_link: amazonLink, summary }
+      ]);
+
+    if (error) throw error;
 
     return NextResponse.json({ success: true });
   } catch (error) {
@@ -30,7 +37,24 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
-  const db = await getDb();
-  const suggestions = await db.all('SELECT * FROM story_suggestions');
-  return NextResponse.json(suggestions);
+  try {
+    const supabase = await getDb();
+    if (!supabase) {
+      throw new Error('Failed to initialize database');
+    }
+
+    const { data: suggestions, error } = await supabase
+      .from('story_suggestions')
+      .select('*');
+
+    if (error) throw error;
+
+    return NextResponse.json(suggestions);
+  } catch (error) {
+    console.error('Error fetching suggestions:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch suggestions' },
+      { status: 500 }
+    );
+  }
 }
