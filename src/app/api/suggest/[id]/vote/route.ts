@@ -11,82 +11,88 @@ function hashIP(ip: string): string {
 export async function GET(request: Request, segmentData: { params: Params }) {
   const params = await segmentData.params;
   const id = params.id;
-  const db = await getDb();
+  const supabase = await getDb();
 
   const ip = request.headers.get('x-forwarded-for') || 'unknown';
   const hashedIP = hashIP(ip);
 
   // Get total votes and user's vote status
-  const stats = await db.get(
-    `SELECT 
-      COUNT(*) as totalVotes,
-      EXISTS(
-        SELECT 1 FROM suggestion_votes 
-        WHERE suggestion_id = ? AND hashed_ip = ?
+  const { data: stats, error } = await supabase
+    .from('suggestion_votes')
+    .select('count(*)')
+    .eq('suggestion_id', id)
+    .select(`
+      suggestion_id,
+      count(*) as totalVotes,
+      (
+        select count(*) > 0 
+        from suggestion_votes 
+        where suggestion_id = ${id} 
+        and hashed_ip = '${hashedIP}'
       ) as hasVoted
-    FROM suggestion_votes 
-    WHERE suggestion_id = ?`,
-    [id, hashedIP, id]
-  );
+    `)
+    .single();
 
+  if (error) throw error;
   return NextResponse.json(stats);
 }
 
 export async function POST(request: Request, segmentData: { params: Params }) {
   const params = await segmentData.params;
-  const db = await getDb();
+  const supabase = await getDb();
   const { id } = params;
 
   const ip = request.headers.get('x-forwarded-for') || 'unknown';
   const hashedIP = hashIP(ip);
 
-  await db.run('BEGIN TRANSACTION');
-
   try {
     // Check if suggestion exists
-    const suggestion = await db.get(
-      'SELECT id FROM story_suggestions WHERE id = ?',
-      [id]
-    );
+    const { data: suggestion, error: suggestionError } = await supabase
+      .from('story_suggestions')
+      .select('id')
+      .eq('id', id)
+      .single();
 
-    if (!suggestion) {
+    if (suggestionError || !suggestion) {
       return NextResponse.json(
         { error: 'Suggestion not found' },
         { status: 404 }
       );
     }
 
-    // Insert vote or return error if already voted
-    const result = await db.run(
-      `INSERT INTO suggestion_votes (suggestion_id, hashed_ip, vote_count)
-       VALUES (?, ?, 1)
-       ON CONFLICT(suggestion_id, hashed_ip) DO NOTHING`,
-      [id, hashedIP]
-    );
+    // Try to insert vote
+    const { error: voteError } = await supabase
+      .from('suggestion_votes')
+      .insert([
+        { suggestion_id: id, hashed_ip: hashedIP, vote_count: 1 }
+      ]);
 
-    if (result.changes === 0) {
-      await db.run('ROLLBACK');
+    if (voteError?.code === '23505') { // Unique constraint violation
       return NextResponse.json(
         { error: 'Already voted' },
         { status: 400 }
       );
     }
-
-    await db.run('COMMIT');
+    if (voteError) throw voteError;
 
     // Get updated vote count
-    const stats = await db.get(
-      `SELECT 
-        COUNT(*) as totalVotes,
-        1 as hasVoted
-       FROM suggestion_votes 
-       WHERE suggestion_id = ?`,
-      [id]
-    );
+    const { data: stats, error: statsError } = await supabase
+      .from('suggestion_votes')
+      .select('suggestion_id')
+      .eq('suggestion_id', id)
+      .select('count')
+      .single();
 
-    return NextResponse.json(stats);
+    if (statsError) throw statsError;
+
+    const response = {
+      suggestion_id: id,
+      totalVotes: stats?.count || 0,
+      hasVoted: true
+    };
+
+    return NextResponse.json(response);
   } catch (error) {
-    await db.run('ROLLBACK');
     console.error('Error recording vote:', error);
     return NextResponse.json(
       { error: 'Failed to record vote' },

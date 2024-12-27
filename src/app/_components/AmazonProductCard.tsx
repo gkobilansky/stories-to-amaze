@@ -34,7 +34,7 @@ export function AmazonProductCard({ title, price, imageUrl, productUrl }: Amazon
         <div className="p-4">
           <h3 className="font-bold text-lg mb-2">{title}</h3>
           <div className="flex items-center gap-2">
-            <p className="text-green-600 font-semibold">{price}</p>
+            <p className="text-purple-300 font-semibold">{price}</p>
             <span className="text-gray-600 dark:text-gray-400 opacity-0 transition-opacity group-hover:opacity-100">
               Shop on Amazon →
             </span>

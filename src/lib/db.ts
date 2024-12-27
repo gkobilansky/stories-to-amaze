@@ -3,10 +3,15 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 let supabase: SupabaseClient | null = null;
 
 export async function getDb() {
+  console.log('getDb called');
+  console.log('supabase', supabase);
   if (!supabase) {
-    const supabaseUrl = 'https://csfieadgcddzmvlyhxyl.supabase.co';
-    const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNzZmllYWRnY2Rkem12bHloeHlsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzE3NjUwNDAsImV4cCI6MjA0NzM0MTA0MH0.yKhvW4DJfCIX18ZVS0AR39oKLvpo0P_mxTOxmJPyUdo';
+    console.log('supabase is null, creating new instance');
+    const supabaseUrl = process.env.SUPABASE_URL || '';
+    const supabaseKey = process.env.SUPABASE_KEY || '';
     supabase = createClient(supabaseUrl, supabaseKey);
+
+    console.log('supabase created');
 
     const { error: error1 } = await supabase
       .from('story_suggestions')
@@ -36,9 +41,11 @@ export async function getDb() {
       .limit(1);
 
     if (error3) {
-      await supabase
+      console.log('error3', error3);
+      const result = await supabase
         .from('post_stats')
         .insert([{ slug: 'sample-slug', hits: 0, likes: 0 }]);
+      console.log('result', result);
     }
 
     const { error: error4 } = await supabase
