@@ -24,7 +24,7 @@ export function AmazonProductCard({ title, price, imageUrl, productUrl }: Amazon
             src={imageUrl}
             alt={title}
             fill
-            className="object-cover p-5 transition-transform duration-300 group-hover:scale-105"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
             sizes="128px"
           />
         </div>
