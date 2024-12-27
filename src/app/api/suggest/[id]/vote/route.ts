@@ -78,16 +78,20 @@ export async function POST(request: Request, segmentData: { params: Params }) {
     // Get updated vote count
     const { data: stats, error: statsError } = await supabase
       .from('suggestion_votes')
-      .select(`
-        suggestion_id,
-        count(*) as totalVotes
-      `)
+      .select('suggestion_id')
       .eq('suggestion_id', id)
+      .select('count')
       .single();
 
     if (statsError) throw statsError;
 
-    return NextResponse.json({ ...stats, hasVoted: true });
+    const response = {
+      suggestion_id: id,
+      totalVotes: stats?.count || 0,
+      hasVoted: true
+    };
+
+    return NextResponse.json(response);
   } catch (error) {
     console.error('Error recording vote:', error);
     return NextResponse.json(
