@@ -2,8 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: #FF6B6B;    /* Cheerful coral red */
+  --secondary-color: #4ECDC4;  /* Playful teal */
+  --accent-color: #FFD93D;     /* Sunny yellow */
+}
+
 @layer base {
- article a {
-    @apply text-purple-200 hover:text-purple-300 hover:underline;
+  /* Add rounded corners to all images by default */
+  img {
+    @apply rounded-2xl;
   }
+
+  article a {
+    @apply text-primary-color;
+  }
+  
+  /* Add hover styles only to the anchor tag itself, not its children */
+  article a:not(:has(*)):hover {
+    @apply text-secondary-color underline;
+  }
+  
+  /* Alternative approach using direct text content */
+  article a:has(text):hover {
+    @apply text-secondary-color underline;
+  }
+  
+  h1, h2, h3 {
+    @apply font-bold;
+  }
+  
+  /* More playful headings */
+  h1 {
+    @apply text-4xl md:text-5xl text-primary-color;
+  }
+  
+  h2 {
+    @apply text-3xl md:text-4xl text-secondary-color;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+}
+
+/* Add subtle animation to cards */
+.group:hover .group-hover\:scale-105 {
+  transform: scale(1.05);
+}
+
+/* Smooth transitions */
+* {
+  transition-property: color, background-color, border-color, transform, opacity;
+  transition-duration: 300ms;
+  transition-timing-function: ease-in-out;
 }

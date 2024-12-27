@@ -5,7 +5,7 @@ const logo = "/assets/stories-to-amaze-no-text.jpg";
 
 const Header = () => {
   return (
-    <div className="flex items-center lg:w-1/2">
+    <div className="flex items-left mt-2 lg:w-1/2 h-full">
       <Image
         src={logo}
         alt="Stories to Amaze Logo"
