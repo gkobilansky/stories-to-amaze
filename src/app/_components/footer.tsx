@@ -17,9 +17,9 @@ export function Footer() {
               height={50}
               className="mr-4"
             />
-            <h3 className="text-4xl lg:text-[2.5rem] font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4">
+            <p className="text-2xl font-bold tracking-tighter leading-tight text-center lg:text-left mb-10 lg:mb-0 lg:pr-4">
               All product links are Amazon affiliate links.
-            </h3>
+            </p>
           </div>
           <div className="flex flex-col lg:flex-row justify-center items-center lg:pl-4 lg:w-1/2">
             <a
@@ -32,7 +32,7 @@ export function Footer() {
               href={`https://github.com/gkobilansky/${REPO_PATH}`}
               className="mx-3 font-bold hover:underline"
             >
-              View on GitHub
+              Source code on GitHub
             </a>
           </div>
         </div>
