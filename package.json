@@ -11,7 +11,7 @@
     "date-fns": "^3.6.0",
     "formidable": "^3.5.2",
     "gray-matter": "^4.0.3",
-    "next": "15.0.2",
+    "next": "15.0.7",
     "openai": "^4.76.1",
     "paapi5-typescript-sdk": "^0.2.0",
     "querystring": "^0.2.1",
