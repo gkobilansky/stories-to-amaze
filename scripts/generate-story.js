@@ -17,30 +17,19 @@ const AMAZON_TAG = 'flowathl-20';
  * Generate story text using Gemini
  */
 async function generateStoryText(productName, productDescription, keywords) {
-  const prompt = `Write an extraordinary adventure story (300-500 words) featuring "${productName}".
+  const prompt = `Write a 400-word adventure story featuring "${productName}".
 
-Product description: ${productDescription}
+Style: Indiana Jones meets J. Peterman catalog - epic adventure with everyday protagonist.
 
-Style inspiration: Indiana Jones, J. Peterman catalog, Tomb Raider, Jack West Jr., Nina Wilde
-Think: Everyday people, everyday products, EXTRAORDINARY adventures
+The story must:
+- Feature an archaeologist, explorer, or curator in exotic location
+- Product plays crucial role at climactic moment
+- Family-friendly, witty, thrilling
+- Include keywords: ${keywords[0]}
 
-Requirements:
-- Create an epic, cinematic adventure (treasure hunt, expedition, mystery, daring escape)
-- Everyday protagonist thrust into extraordinary circumstances
-- The product plays a crucial role in the adventure (not the hero, but essential)
-- Vivid, exotic locations or unusual settings
-- High stakes but family-friendly (no graphic violence)
-- Witty, adventurous tone - capture the imagination!
-- Target keywords naturally: ${keywords.join(', ')}
-- Include the product name: "${productName}"
-- Mention the product 2-3 times as it helps in key moments
+Example opening: "Dr. Sarah Chen, whose expertise in ancient Sumerian texts rarely involved actual danger, found herself..."
 
-Examples of the vibe:
-- "In the depths of the Amazon, archaeologist Dr. Sarah Chen's [product] was the only thing standing between her and certain doom..."
-- "When the ancient map led tomb raider Marcus Webb to a frozen Himalayan peak, his [product] became more than just gear..."
-- "The encrypted message arrived at midnight. Museum curator Elena Vasquez had 48 hours to decode it, armed only with her wits and a [product]..."
-
-Make it thrilling, imaginative, and fun! Less "suburban couch," more "lost city of gold."`;
+Write the complete 400-word story now:`;
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GOOGLE_API_KEY}`;
 
@@ -53,7 +42,7 @@ Make it thrilling, imaginative, and fun! Less "suburban couch," more "lost city 
         temperature: 0.9,
         topP: 0.95,
         topK: 40,
-        maxOutputTokens: 2048,
+        maxOutputTokens: 4096,
       }
     })
   });

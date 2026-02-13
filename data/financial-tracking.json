@@ -1,0 +1,26 @@
+{
+  "costs": {
+    "monthly": {
+      "google_ai_api": 0,
+      "vercel_hosting": 0,
+      "domain": 0,
+      "other": 0
+    },
+    "per_story": {
+      "story_generation": 0.0001,
+      "image_generation": 0.03,
+      "total": 0.0301
+    },
+    "total_spent": 0
+  },
+  "revenue": {
+    "amazon_associates": {
+      "clicks": 0,
+      "conversions": 0,
+      "earnings": 0
+    },
+    "total_earned": 0
+  },
+  "stories_generated": 0,
+  "last_updated": "2026-02-13"
+}
