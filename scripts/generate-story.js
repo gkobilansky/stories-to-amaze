@@ -188,7 +188,7 @@ function createMarkdownFile(data) {
     .replace(/^-|-$/g, '');
 
   const frontmatter = `---
-title: ${data.title}
+title: "${data.title}"
 product:
   amazonId: '${data.productASIN}'
   name: '${data.productName}'

@@ -1,5 +1,5 @@
 ---
-title: Lost City's Cipher: Best Wireless Earbuds
+title: "Lost City's Cipher: Best Wireless Earbuds"
 product:
   amazonId: 'B0EXAMPLE1'
   name: 'Wireless Bluetooth Earbuds'
