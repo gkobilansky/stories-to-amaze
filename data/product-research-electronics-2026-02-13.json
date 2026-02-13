@@ -1,0 +1,79 @@
+[
+  {
+    "productType": "wireless earbuds",
+    "category": "electronics",
+    "primaryKeyword": "best wireless earbuds",
+    "relatedKeywords": [
+      "wireless earbuds for running",
+      "noise cancelling earbuds",
+      "cheap wireless earbuds",
+      "bluetooth earbuds with mic",
+      "comfortable wireless earbuds"
+    ],
+    "problem": "The inconvenience and restriction of tangled wires, limited mobility during activities, and the desire for a seamless, hands-free audio experience for music, calls, and podcasts.",
+    "audience": "Commuters, fitness enthusiasts, students, remote workers, travelers, and anyone seeking convenience, freedom from wires, and high-quality portable audio for daily use.",
+    "priceRange": "$30-$250",
+    "suggestedProduct": {
+      "name": "Wireless Bluetooth Earbuds",
+      "asin": "B0EXAMPLE1",
+      "estimatedPrice": "$29.99",
+      "description": "True wireless earbuds with noise cancellation and 24-hour battery life"
+    },
+    "score": 100,
+    "scoreReasons": [
+      "Good price range for affiliate",
+      "Clear, relatable problem",
+      "Well-defined audience",
+      "Has primary search keyword"
+    ],
+    "readyForStory": true
+  },
+  {
+    "productType": "smart home devices",
+    "category": "electronics",
+    "primaryKeyword": "best smart home devices",
+    "relatedKeywords": [
+      "smart home starter kit",
+      "home automation ideas",
+      "smart home security systems",
+      "Alexa compatible devices",
+      "smart home gadgets"
+    ],
+    "problem": "Manual and inefficient control over home environment, security, and energy consumption, leading to inconvenience, wasted resources, and lack of peace of mind.",
+    "audience": "Homeowners and renters, tech-savvy individuals or those seeking convenience, enhanced security, accessibility, and energy efficiency in their living spaces, often aged 25-65.",
+    "priceRange": "$20 - $300 (per individual device or basic starter kit)",
+    "suggestedProduct": null,
+    "score": 100,
+    "scoreReasons": [
+      "Good price range for affiliate",
+      "Clear, relatable problem",
+      "Well-defined audience",
+      "Has primary search keyword"
+    ],
+    "readyForStory": true
+  },
+  {
+    "productType": "phone accessories",
+    "category": "electronics",
+    "primaryKeyword": "best portable charger",
+    "relatedKeywords": [
+      "power bank for iPhone",
+      "portable phone charger fast charging",
+      "small power bank",
+      "high capacity portable charger",
+      "wireless portable charger"
+    ],
+    "problem": "Phones running out of battery at inconvenient times, leading to missed calls, lost navigation, or inability to capture moments, especially when away from power outlets.",
+    "audience": "Travelers (commuters, road trippers, international travelers), students, heavy phone users (gamers, social media enthusiasts, remote workers), outdoor adventurers, and anyone experiencing battery anxiety.",
+    "priceRange": "$25-$75",
+    "suggestedProduct": null,
+    "score": 100,
+    "scoreReasons": [
+      "Good price range for affiliate",
+      "Clear, relatable problem",
+      "Well-defined audience",
+      "Has primary search keyword"
+    ],
+    "readyForStory": true
+  }
+]
