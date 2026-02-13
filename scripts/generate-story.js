@@ -202,8 +202,8 @@ date: "${new Date().toISOString().split('T')[0]}"
 excerpt: "${data.metaDescription}"
 coverImage: "/assets/blog/${slug}/${slug}.png"
 author:
-  name: Stories to Amaze
-  picture: "/assets/blog/authors/default.png"
+  name: J Peterman
+  picture: "/assets/blog/authors/jpeterman.png"
 ogImage:
   url: "/assets/blog/${slug}/${slug}.png"
 keywords: "${data.keywords.join(', ')}"
