@@ -1,0 +1,79 @@
+[
+  {
+    "productType": "cat toys",
+    "category": "pets",
+    "primaryKeyword": "best cat toys",
+    "relatedKeywords": [
+      "interactive cat toys",
+      "catnip toys",
+      "puzzle toys for cats",
+      "cat wands",
+      "laser pointer for cats"
+    ],
+    "problem": "Cats experience boredom, lack of exercise, mental stagnation, and can exhibit destructive behaviors (scratching furniture, excessive meowing) when not adequately stimulated. Owners seek ways to keep their cats entertained, active, and mentally engaged to improve their well-being and strengthen the human-animal bond.",
+    "audience": "Cat owners (first-time, experienced, multi-cat households), individuals looking to enrich their cat's environment, people seeking to reduce destructive feline behaviors, and gift-givers for cat lovers.",
+    "priceRange": "$5 - $50",
+    "suggestedProduct": {
+      "name": "Interactive Cat Toy",
+      "asin": "B0EXAMPLE5",
+      "estimatedPrice": "$19.99",
+      "description": "Motion-activated cat toy with feathers and catnip"
+    },
+    "score": 80,
+    "scoreReasons": [
+      "Low price - lower commission",
+      "Clear, relatable problem",
+      "Well-defined audience",
+      "Has primary search keyword"
+    ],
+    "readyForStory": true
+  },
+  {
+    "productType": "dog training tools",
+    "category": "pets",
+    "primaryKeyword": "dog training tools",
+    "relatedKeywords": [
+      "best puppy training tools",
+      "dog obedience training equipment",
+      "no pull dog harness",
+      "dog clicker training kit",
+      "remote dog training collar"
+    ],
+    "problem": "Unruly dog behavior (pulling on leash, jumping, excessive barking, not coming when called), difficulty communicating with a dog, lack of basic obedience, and the desire for a well-behaved companion.",
+    "audience": "New dog owners, puppy owners, owners of adolescent or adult dogs with behavioral issues, owners looking to improve their dog's skills, individuals adopting rescue dogs, and anyone seeking a more harmonious relationship with their pet.",
+    "priceRange": "$5 - $200+",
+    "suggestedProduct": null,
+    "score": 80,
+    "scoreReasons": [
+      "Low price - lower commission",
+      "Clear, relatable problem",
+      "Well-defined audience",
+      "Has primary search keyword"
+    ],
+    "readyForStory": true
+  },
+  {
+    "productType": "pet cameras",
+    "category": "pets",
+    "primaryKeyword": "best pet camera",
+    "relatedKeywords": [
+      "dog camera with treat dispenser",
+      "cat camera monitor",
+      "pet monitor app",
+      "two-way audio pet camera",
+      "pet camera for separation anxiety"
+    ],
+    "problem": "Pet owners feel anxious or guilty leaving their pets alone, worrying about their well-being, behavior, potential mischief, or loneliness. They desire to monitor, interact with, and ensure the safety of their pets remotely.",
+    "audience": "Pet owners (primarily dog and cat owners) who work long hours, travel frequently, have new pets, pets with health issues or separation anxiety, or simply want to stay connected and monitor their pets' activity and safety while away from home.",
+    "priceRange": "$40-$250",
+    "suggestedProduct": null,
+    "score": 100,
+    "scoreReasons": [
+      "Good price range for affiliate",
+      "Clear, relatable problem",
+      "Well-defined audience",
+      "Has primary search keyword"
+    ],
+    "readyForStory": true
+  }
+]
