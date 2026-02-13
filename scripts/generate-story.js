@@ -17,21 +17,30 @@ const AMAZON_TAG = 'flowathl-20';
  * Generate story text using Gemini
  */
 async function generateStoryText(productName, productDescription, keywords) {
-  const prompt = `Write an engaging, family-friendly story (300-500 words) about a product called "${productName}".
+  const prompt = `Write an extraordinary adventure story (300-500 words) featuring "${productName}".
 
 Product description: ${productDescription}
 
-Requirements:
-- Create a relatable problem/situation that the product solves
-- Include authentic characters (family, pets, everyday people)
-- Natural product integration (don't make it the main focus)
-- Conversational, warm tone (not flowery or over-the-top)
-- Target keywords naturally: ${keywords.join(', ')}
-- Include the product name exactly as written: "${productName}"
-- Mention the product 2-3 times naturally in the story
-- End with a satisfying resolution showing the product's impact
+Style inspiration: Indiana Jones, J. Peterman catalog, Tomb Raider, Jack West Jr., Nina Wilde
+Think: Everyday people, everyday products, EXTRAORDINARY adventures
 
-Style: Similar to a short blog post or customer review story. Authentic and helpful, not salesy.`;
+Requirements:
+- Create an epic, cinematic adventure (treasure hunt, expedition, mystery, daring escape)
+- Everyday protagonist thrust into extraordinary circumstances
+- The product plays a crucial role in the adventure (not the hero, but essential)
+- Vivid, exotic locations or unusual settings
+- High stakes but family-friendly (no graphic violence)
+- Witty, adventurous tone - capture the imagination!
+- Target keywords naturally: ${keywords.join(', ')}
+- Include the product name: "${productName}"
+- Mention the product 2-3 times as it helps in key moments
+
+Examples of the vibe:
+- "In the depths of the Amazon, archaeologist Dr. Sarah Chen's [product] was the only thing standing between her and certain doom..."
+- "When the ancient map led tomb raider Marcus Webb to a frozen Himalayan peak, his [product] became more than just gear..."
+- "The encrypted message arrived at midnight. Museum curator Elena Vasquez had 48 hours to decode it, armed only with her wits and a [product]..."
+
+Make it thrilling, imaginative, and fun! Less "suburban couch," more "lost city of gold."`;
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${GOOGLE_API_KEY}`;
 
@@ -100,18 +109,22 @@ async function generateStoryImage(imagePrompt) {
  * Generate SEO-optimized title
  */
 async function generateTitle(productName, keywords) {
-  const prompt = `Create a compelling blog post title (under 60 characters) for a story about "${productName}".
+  const prompt = `Create an adventurous, captivating title (under 60 characters) for an extraordinary adventure story featuring "${productName}".
 
 The title should:
-- Include the primary keyword: "${keywords[0]}"
-- Be click-worthy and emotional
-- Not be generic or boring
-- Feel authentic, not clickbait-y
+- Include the keyword: "${keywords[0]}"
+- Sound like an adventure novel or treasure hunt
+- Be intriguing and cinematic
+- Capture imagination, not just solve a problem
 
-Examples of good titles:
-- "This $20 Cat Toy Saved Our Furniture"
-- "How a Fire Blanket Became Our Kitchen Hero"
-- "The Pressure Cooker That Changed Dinnertime"
+Style inspiration: Indiana Jones, J. Peterman, Tomb Raider
+
+Examples of the vibe:
+- "The [Product] That Unlocked Machu Picchu"
+- "Lost City Found: Armed With Only a [Product]"
+- "The Last Expedition's Secret: A [Product]"
+- "Desert Crossing: When a [Product] Saves Everything"
+- "The Cave of Wonders and One Essential [Product]"
 
 Return ONLY the title, nothing else.`;
 
@@ -247,9 +260,12 @@ async function generateStory(productInfo) {
 
   // Step 4: Generate image
   console.log('🖼️  Generating image...');
-  const imagePrompt = `Create a warm, family-friendly illustration for a story about ${productInfo.name}.
-Style: children's book illustration, warm colors, inviting and relatable.
-Scene: Show the product in use in a cozy, everyday setting.
+  const imagePrompt = `Create an epic, cinematic illustration for an adventure story featuring ${productInfo.name}.
+Style: Movie poster, adventure novel cover art, National Geographic meets Indiana Jones
+Scene: Dramatic, exotic location (jungle ruins, desert dunes, mountain peaks, ancient temple)
+Include: The product being used in a thrilling moment of the adventure
+Mood: Adventurous, mysterious, awe-inspiring
+Colors: Rich, cinematic, dramatic lighting
 DO NOT include any text in the image.`;
 
   const imageData = await generateStoryImage(imagePrompt);
