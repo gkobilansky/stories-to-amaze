@@ -4,14 +4,14 @@
     "category": "electronics",
     "primaryKeyword": "best wireless earbuds",
     "relatedKeywords": [
-      "wireless earbuds for running",
-      "noise cancelling earbuds",
-      "cheap wireless earbuds",
-      "bluetooth earbuds with mic",
-      "comfortable wireless earbuds"
+      "noise cancelling wireless earbuds",
+      "best wireless earbuds for running",
+      "affordable wireless earbuds",
+      "true wireless earbuds",
+      "earbuds with long battery life"
     ],
-    "problem": "The inconvenience and restriction of tangled wires, limited mobility during activities, and the desire for a seamless, hands-free audio experience for music, calls, and podcasts.",
-    "audience": "Commuters, fitness enthusiasts, students, remote workers, travelers, and anyone seeking convenience, freedom from wires, and high-quality portable audio for daily use.",
+    "problem": "Tangled wires, limited mobility during activities, distractions from ambient noise, and the inconvenience of traditional wired headphones.",
+    "audience": "Commuters, fitness enthusiasts, students, remote workers, travelers, and anyone seeking convenience, freedom of movement, and high-quality audio for music, podcasts, or calls.",
     "priceRange": "$30-$250",
     "suggestedProduct": {
       "name": "Wireless Bluetooth Earbuds",
@@ -33,15 +33,15 @@
     "category": "electronics",
     "primaryKeyword": "best smart home devices",
     "relatedKeywords": [
-      "smart home starter kit",
-      "home automation ideas",
-      "smart home security systems",
-      "Alexa compatible devices",
-      "smart home gadgets"
+      "smart home security",
+      "smart lighting ideas",
+      "smart thermostat reviews",
+      "home automation system",
+      "smart plugs for home"
     ],
-    "problem": "Manual and inefficient control over home environment, security, and energy consumption, leading to inconvenience, wasted resources, and lack of peace of mind.",
-    "audience": "Homeowners and renters, tech-savvy individuals or those seeking convenience, enhanced security, accessibility, and energy efficiency in their living spaces, often aged 25-65.",
-    "priceRange": "$20 - $300 (per individual device or basic starter kit)",
+    "problem": "Common problems include inefficient energy use (e.g., leaving lights on, inconsistent climate control), lack of convenience (manual adjustments for lights, thermostats), and limited security monitoring. Smart home devices provide automation, remote control, and real-time monitoring to address these issues.",
+    "audience": "Homeowners and renters, busy professionals, tech-savvy individuals, and families seeking convenience, enhanced security, energy savings, and modern living through automated and remotely controllable household functions.",
+    "priceRange": "$20 - $500",
     "suggestedProduct": null,
     "score": 100,
     "scoreReasons": [
@@ -57,14 +57,14 @@
     "category": "electronics",
     "primaryKeyword": "best portable charger",
     "relatedKeywords": [
-      "power bank for iPhone",
-      "portable phone charger fast charging",
-      "small power bank",
-      "high capacity portable charger",
+      "power bank",
+      "portable phone charger",
+      "external battery pack",
+      "fast charging power bank",
       "wireless portable charger"
     ],
-    "problem": "Phones running out of battery at inconvenient times, leading to missed calls, lost navigation, or inability to capture moments, especially when away from power outlets.",
-    "audience": "Travelers (commuters, road trippers, international travelers), students, heavy phone users (gamers, social media enthusiasts, remote workers), outdoor adventurers, and anyone experiencing battery anxiety.",
+    "problem": "Running out of battery life on mobile devices while on the go, leading to missed communication, navigation issues, or inability to access important information and entertainment.",
+    "audience": "Travelers, commuters, students, outdoor enthusiasts, and professionals who rely heavily on their mobile devices throughout the day and need reliable power away from outlets.",
     "priceRange": "$25-$75",
     "suggestedProduct": null,
     "score": 100,

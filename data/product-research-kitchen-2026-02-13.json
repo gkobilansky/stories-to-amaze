@@ -1,0 +1,84 @@
+[
+  {
+    "productType": "air fryers",
+    "category": "kitchen",
+    "primaryKeyword": "best air fryer",
+    "relatedKeywords": [
+      "air fryer reviews",
+      "air fryer oven",
+      "Ninja air fryer",
+      "large capacity air fryer",
+      "air fryer recipes healthy"
+    ],
+    "problem": "The need for a quick, convenient, and healthier way to achieve crispy, delicious food without the excessive oil and mess of deep frying, or the long preheating times of a conventional oven for smaller meals.",
+    "audience": "Health-conscious individuals, busy professionals and families, college students, small apartment dwellers, individuals looking for cooking convenience and versatility, people wanting to reduce fat in their diet.",
+    "priceRange": "$50-$250",
+    "suggestedProduct": {
+      "name": "Digital Air Fryer XL",
+      "asin": "B0EXAMPLE2",
+      "estimatedPrice": "$79.99",
+      "description": "6-quart air fryer with 8 cooking presets and digital display"
+    },
+    "score": 100,
+    "scoreReasons": [
+      "Good price range for affiliate",
+      "Clear, relatable problem",
+      "Well-defined audience",
+      "Has primary search keyword"
+    ],
+    "readyForStory": true
+  },
+  {
+    "productType": "instant pots",
+    "category": "kitchen",
+    "primaryKeyword": "best instant pot",
+    "relatedKeywords": [
+      "electric pressure cooker",
+      "multi-cooker",
+      "Instant Pot recipes",
+      "Instant Pot reviews",
+      "Instant Pot vs Ninja Foodi"
+    ],
+    "problem": "Lack of time for cooking healthy, home-cooked meals; desire for quick, convenient, and versatile kitchen solutions that reduce effort and cleanup while often replacing multiple appliances.",
+    "audience": "Busy professionals and parents, small families/individuals, health-conscious cooks, home cooks with limited kitchen space, those seeking convenience and efficiency in meal preparation.",
+    "priceRange": "$70-$200",
+    "suggestedProduct": {
+      "name": "Multi-Use Pressure Cooker",
+      "asin": "B0EXAMPLE4",
+      "estimatedPrice": "$89.99",
+      "description": "7-in-1 electric pressure cooker with 14 smart programs"
+    },
+    "score": 100,
+    "scoreReasons": [
+      "Good price range for affiliate",
+      "Clear, relatable problem",
+      "Well-defined audience",
+      "Has primary search keyword"
+    ],
+    "readyForStory": true
+  },
+  {
+    "productType": "coffee makers",
+    "category": "kitchen",
+    "primaryKeyword": "best coffee maker",
+    "relatedKeywords": [
+      "drip coffee maker",
+      "espresso machine",
+      "single serve coffee maker",
+      "programmable coffee maker",
+      "coffee maker with grinder"
+    ],
+    "problem": "The need for convenient, fresh, and often more affordable coffee at home, tailored to individual preferences, without the daily hassle or cost of coffee shop visits. It solves the desire for a personalized morning routine and the ability to entertain guests with quality beverages.",
+    "audience": "Daily coffee drinkers, budget-conscious individuals looking to save money on cafe purchases, coffee enthusiasts seeking specific brew methods or higher quality, busy professionals needing quick and easy coffee, students, and homeowners looking to equip their kitchen.",
+    "priceRange": "$30-$500",
+    "suggestedProduct": null,
+    "score": 100,
+    "scoreReasons": [
+      "Good price range for affiliate",
+      "Clear, relatable problem",
+      "Well-defined audience",
+      "Has primary search keyword"
+    ],
+    "readyForStory": true
+  }
+]
