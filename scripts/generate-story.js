@@ -53,7 +53,7 @@ Make it thrilling, imaginative, and fun! Less "suburban couch," more "lost city 
         temperature: 0.9,
         topP: 0.95,
         topK: 40,
-        maxOutputTokens: 1024,
+        maxOutputTokens: 2048,
       }
     })
   });
@@ -61,7 +61,15 @@ Make it thrilling, imaginative, and fun! Less "suburban couch," more "lost city 
   const data = await response.json();
 
   if (data.candidates && data.candidates[0]) {
-    return data.candidates[0].content.parts[0].text;
+    const story = data.candidates[0].content.parts[0].text;
+
+    // Check if story seems truncated (too short)
+    if (story.length < 300) {
+      console.warn('⚠️  Story seems truncated:', story.length, 'characters');
+      console.warn('Finish reason:', data.candidates[0].finishReason);
+    }
+
+    return story;
   }
 
   throw new Error('Failed to generate story: ' + JSON.stringify(data));
