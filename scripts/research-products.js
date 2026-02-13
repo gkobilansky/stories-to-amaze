@@ -10,7 +10,11 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY || 'AIzaSyD4RPULijE80-Zd9_DM3perYjNlAhV4TH8';
+const GOOGLE_API_KEY = process.env.GOOGLE_API_KEY;
+
+if (!GOOGLE_API_KEY) {
+  throw new Error('GOOGLE_API_KEY environment variable is required');
+}
 
 /**
  * Trending product ideas based on 2026 Amazon trends
