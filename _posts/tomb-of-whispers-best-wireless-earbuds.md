@@ -1,5 +1,5 @@
 ---
-title: Tomb of Whispers: Best Wireless Earbuds
+title: "Tomb of Whispers: Best Wireless Earbuds"
 product:
   amazonId: 'B0EXAMPLE1'
   name: 'Wireless Bluetooth Earbuds'
