@@ -14,14 +14,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 /**
- * Get real Amazon product URL (placeholder for now)
- * In production, this would use Amazon Associates SiteStripe or API
+ * Get real Amazon product URL with affiliate tag
  */
 function getAmazonProductURL(productName, asin) {
-  // For now, return example URL
-  // In production, you'd generate real amzn.to links with your tag
-  const slug = productName.toLowerCase().replace(/[^a-z0-9]+/g, '');
-  return `https://amzn.to/${slug}`;
+  // If we have a real ASIN, use it
+  if (asin && asin !== 'B0PENDING') {
+    return `https://amazon.com/dp/${asin}?tag=flowathl-20`;
+  }
+
+  // Fallback for pending ASINs - create search URL with affiliate tag
+  const searchQuery = encodeURIComponent(productName);
+  return `https://amazon.com/s?k=${searchQuery}&tag=flowathl-20`;
 }
 
 /**

@@ -5,7 +5,7 @@ product:
   name: 'Wireless Bluetooth Earbuds'
   price: '$29.99'
   image: '/assets/blog/lost-city-s-cipher-best-wireless-earbuds/lost-city-s-cipher-best-wireless-earbuds.png'
-  url: 'https://amzn.to/wirelessbluetoothearbuds'
+  url: 'https://amazon.com/s?k=Wireless+Bluetooth+Earbuds&tag=flowathl-20'
 date: "2026-02-13"
 excerpt: "Cryptologist Dr. Thorne trades dusty libraries for a perilous Andes quest. Perched above a chasm, he nears a fabled temple. Dive into ancient mystery and danger!"
 coverImage: "/assets/blog/lost-city-s-cipher-best-wireless-earbuds/lost-city-s-cipher-best-wireless-earbuds.png"
