@@ -1,11 +1,11 @@
 ---
 title: "Lost City's Cipher: Best Wireless Earbuds"
 product:
-  amazonId: 'B0EXAMPLE1'
-  name: 'Wireless Bluetooth Earbuds'
+  amazonId: 'B09DT48V16'
+  name: 'TAGRY Bluetooth Headphones True Wireless Earbuds'
   price: '$29.99'
   image: '/assets/blog/lost-city-s-cipher-best-wireless-earbuds/lost-city-s-cipher-best-wireless-earbuds.png'
-  url: 'https://amazon.com/s?k=Wireless+Bluetooth+Earbuds&tag=flowathl-20'
+  url: 'https://amazon.com/dp/B09DT48V16?tag=flowathl-20'
 date: "2026-02-13"
 excerpt: "Cryptologist Dr. Thorne trades dusty libraries for a perilous Andes quest. Perched above a chasm, he nears a fabled temple. Dive into ancient mystery and danger!"
 coverImage: "/assets/blog/lost-city-s-cipher-best-wireless-earbuds/lost-city-s-cipher-best-wireless-earbuds.png"
