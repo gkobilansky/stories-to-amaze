@@ -6,6 +6,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { scrapeProducts } from './scrape-amazon-products.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -114,55 +115,39 @@ Format as JSON:
 }
 
 /**
- * Find real Amazon products using search
- * This is a simplified approach - you can enhance with actual Amazon API
+ * Find real Amazon products using web scraping
  */
-async function findAmazonProducts(keyword) {
-  // For now, return curated product suggestions
-  // In production, this would use Amazon Associates SiteStripe or scraping
+async function findAmazonProducts(keyword, category) {
+  // Scrape real Amazon products for this category
+  const products = await scrapeProducts(category, 10);
 
-  const productSuggestions = {
-    'wireless earbuds': {
-      name: 'Wireless Bluetooth Earbuds',
-      asin: 'B0EXAMPLE1',
-      estimatedPrice: '$29.99',
-      description: 'True wireless earbuds with noise cancellation and 24-hour battery life'
-    },
-    'air fryer': {
-      name: 'Digital Air Fryer XL',
-      asin: 'B0EXAMPLE2',
-      estimatedPrice: '$79.99',
-      description: '6-quart air fryer with 8 cooking presets and digital display'
-    },
-    'robot vacuum': {
-      name: 'Smart Robot Vacuum',
-      asin: 'B0EXAMPLE3',
-      estimatedPrice: '$199.99',
-      description: 'Wi-Fi connected robot vacuum with mapping and self-emptying base'
-    },
-    'instant pot': {
-      name: 'Multi-Use Pressure Cooker',
-      asin: 'B0EXAMPLE4',
-      estimatedPrice: '$89.99',
-      description: '7-in-1 electric pressure cooker with 14 smart programs'
-    },
-    'cat toy': {
-      name: 'Interactive Cat Toy',
-      asin: 'B0EXAMPLE5',
-      estimatedPrice: '$19.99',
-      description: 'Motion-activated cat toy with feathers and catnip'
-    }
-  };
-
-  // Find closest match
-  const lowerKeyword = keyword.toLowerCase();
-  for (const [key, product] of Object.entries(productSuggestions)) {
-    if (lowerKeyword.includes(key) || key.includes(lowerKeyword)) {
-      return product;
-    }
+  if (products.length === 0) {
+    console.log(`  ⚠️  No products found for ${category}`);
+    return null;
   }
 
-  return null;
+  // Try to find one that matches the keyword
+  const lowerKeyword = keyword.toLowerCase();
+  const words = lowerKeyword.split(' ').filter(w => w.length > 3);
+
+  // Score each product by keyword match
+  const scored = products.map(p => {
+    const lowerName = p.name.toLowerCase();
+    const score = words.reduce((s, w) => s + (lowerName.includes(w) ? 1 : 0), 0);
+    return { ...p, matchScore: score };
+  });
+
+  // Return best match, or first product if no keyword match
+  scored.sort((a, b) => b.matchScore - a.matchScore);
+  const best = scored[0];
+
+  return {
+    name: best.name,
+    asin: best.asin,
+    estimatedPrice: best.price,
+    description: `${best.name} - available on Amazon`,
+    url: best.affiliateUrl,
+  };
 }
 
 /**
@@ -228,8 +213,8 @@ async function generateProductReport(category, numProducts = 5) {
       continue;
     }
 
-    // Find actual products (simplified for now)
-    const product = await findAmazonProducts(research.primaryKeyword);
+    // Find actual products using real Amazon scraping
+    const product = await findAmazonProducts(research.primaryKeyword, category);
 
     // Score the idea
     const { score, reasons } = scoreProductIdea(research);

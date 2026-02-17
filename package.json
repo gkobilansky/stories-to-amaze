@@ -16,6 +16,7 @@
     "next": "15.0.7",
     "openai": "^4.76.1",
     "paapi5-typescript-sdk": "^0.2.0",
+    "playwright-core": "^1.58.2",
     "querystring": "^0.2.1",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
